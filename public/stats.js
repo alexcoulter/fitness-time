@@ -11,8 +11,8 @@ fetch("/api/workouts/range")
 
 API.getWorkoutsInRange()
 
-  function generatePalette() {
-    const arr = [
+function generatePalette() {
+  const arr = [
     "#003f5c",
     "#2f4b7c",
     "#665191",
@@ -32,7 +32,10 @@ API.getWorkoutsInRange()
   ]
 
   return arr;
-  }
+}
+var duration2 = [];
+var pounds2 = [];
+
 function populateChart(data) {
   let durations = duration(data);
   let pounds = calculateTotalWeight(data);
@@ -47,24 +50,16 @@ function populateChart(data) {
   let lineChart = new Chart(line, {
     type: "line",
     data: {
-      labels: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
+      labels: durations.map((d) => d.day),
       datasets: [
         {
           label: "Workout Duration In Minutes",
           backgroundColor: "red",
           borderColor: "red",
-          data: durations,
-          fill: false
-        }
-      ]
+          data: durations.map((d) => d.durTotal),
+          fill: false,
+        },
+      ],
     },
     options: {
       responsive: true,
@@ -92,18 +87,69 @@ function populateChart(data) {
     }
   });
 
+
+
+  // let lineChart = new Chart(line, {
+  //   type: "line",
+  //   data: {
+  //     labels: [
+  //       "Sunday",
+  //       "Monday",
+  //       "Tuesday",
+  //       "Wednesday",
+  //       "Thursday",
+  //       "Friday",
+  //       "Saturday"
+  //     ],
+  //     datasets: [
+  //       {
+  //         label: "Workout Duration In Minutes",
+  //         backgroundColor: "red",
+  //         borderColor: "red",
+  //         data: durations,
+  //         fill: false
+  //       }
+  //     ]
+  //   },
+  //   options: {
+  //     responsive: true,
+  //     title: {
+  //       display: true
+  //     },
+  //     scales: {
+  //       xAxes: [
+  //         {
+  //           display: true,
+  //           scaleLabel: {
+  //             display: true
+  //           }
+  //         }
+  //       ],
+  //       yAxes: [
+  //         {
+  //           display: true,
+  //           scaleLabel: {
+  //             display: true
+  //           }
+  //         }
+  //       ]
+  //     }
+  //   }
+  // });
+
   let barChart = new Chart(bar, {
     type: "bar",
     data: {
-      labels: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
+      labels: durations.map((d) => d.day),
+      // labels: [
+      //   "Sunday",
+      //   "Monday",
+      //   "Tuesday",
+      //   "Wednesday",
+      //   "Thursday",
+      //   "Friday",
+      //   "Saturday",
+      // ],
       datasets: [
         {
           label: "Pounds",
@@ -153,7 +199,7 @@ function populateChart(data) {
         {
           label: "Excercises Performed",
           backgroundColor: colors,
-          data: durations
+          data: duration2
         }
       ]
     },
@@ -173,7 +219,7 @@ function populateChart(data) {
         {
           label: "Excercises Performed",
           backgroundColor: colors,
-          data: pounds
+          data: pounds2
         }
       ]
     },
@@ -188,31 +234,68 @@ function populateChart(data) {
 
 function duration(data) {
   let durations = [];
-  data.forEach(workout => {
+  console.log("data", data);
+  data.forEach((workout) => {
+    workout.exercises.forEach((exe) => {
+      duration2.push(exe.duration);
+    });
+
     durTotal = 0;
     workout.exercises.forEach(exercise => {
       console.log(exercise.duration);
       durTotal += exercise.duration;
     });
-    durations.push(durTotal);
+    // durations.push(durTotal);
+
+
+
+    // if(workout.exercises) {
+    // const duration = workout.exercises
+    //   .map((exercise) => exercise.duration)
+    //   .reduce((acc, cv) => acc + cv);
+  // }
+    const parseDate = new Date(workout.day);
+  // getMonth method returns a zero based index which is why 1 was added
+  const month = parseDate.getMonth() + 1;
+  const date = parseDate.getDate();
+
+  durations.push({
+    day: `${month}-${date}`,
+    durTotal,
   });
-  console.log(durations);
-  return durations;
+});
+console.log("duration2", duration2);
+console.log("duration", durations);
+return durations;
 }
+
+// function duration(data) {
+//   let durations = [];
+//   data.forEach(workout => {
+//     durTotal = 0;
+//     workout.exercises.forEach(exercise => {
+//       console.log(exercise.duration);
+//       durTotal += exercise.duration;
+//     });
+//     durations.push(durTotal);
+//   });
+//   console.log(durations);
+//   console.log("durations",durations);
+//   return durations;
+// }
 
 function calculateTotalWeight(data) {
   let total = [];
   data.forEach(workout => {
     var totalWeight = 0;
     workout.exercises.forEach(exercise => {
-      console.log(exercise.weight, "eachWeight")
-      if(exercise.weight) {
-      totalWeight += exercise.weight;
+      pounds2.push(exercise.weight);
+      if (exercise.weight) {
+        totalWeight += exercise.weight;
       }
     });
     total.push(totalWeight);
   });
-  console.log(total, "total");
   return total;
 }
 
@@ -224,6 +307,6 @@ function workoutNames(data) {
       workouts.push(exercise.name);
     });
   });
-  
+
   return workouts;
 }
