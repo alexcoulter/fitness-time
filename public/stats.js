@@ -233,7 +233,6 @@ function populateChart(data) {
 
 function duration(data) {
   let durations = [];
-  console.log("data", data);
   data.forEach((workout) => {
     workout.exercises.forEach((exe) => {
       duration2.push(exe.duration);
@@ -241,18 +240,9 @@ function duration(data) {
 
     durTotal = 0;
     workout.exercises.forEach(exercise => {
-      console.log(exercise.duration);
       durTotal += exercise.duration;
     });
-    // durations.push(durTotal);
-
-
-
-    // if(workout.exercises) {
-    // const duration = workout.exercises
-    //   .map((exercise) => exercise.duration)
-    //   .reduce((acc, cv) => acc + cv);
-  // }
+    
     const parseDate = new Date(workout.day);
   // getMonth method returns a zero based index which is why 1 was added
   const month = parseDate.getMonth() + 1;
@@ -263,25 +253,8 @@ function duration(data) {
     durTotal,
   });
 });
-console.log("duration2", duration2);
-console.log("duration", durations);
 return durations;
 }
-
-// function duration(data) {
-//   let durations = [];
-//   data.forEach(workout => {
-//     durTotal = 0;
-//     workout.exercises.forEach(exercise => {
-//       console.log(exercise.duration);
-//       durTotal += exercise.duration;
-//     });
-//     durations.push(durTotal);
-//   });
-//   console.log(durations);
-//   console.log("durations",durations);
-//   return durations;
-// }
 
 function calculateTotalWeight(data) {
   let total = [];
