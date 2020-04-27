@@ -14,8 +14,6 @@ const WorkoutSchema = new Schema({
       weight: Number,
       reps: Number,
       sets: Number
-      // type: Schema.Types.ObjectId,
-      // ref: "Exercise"
     }
   ]
 });
