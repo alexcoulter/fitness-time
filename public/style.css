@@ -8,7 +8,8 @@
 .bigWrapper {
   background-image: url("./workout.jpg");
   background-size: cover;
-  height: 800px;
+  min-height: 100%;
+  padding-bottom: 100px;
 }
 
 html,
