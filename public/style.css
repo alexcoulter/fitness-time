@@ -1,3 +1,13 @@
+html,
+body
+ {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 *,
 *::before,
 *::after {
@@ -10,16 +20,6 @@
   background-size: cover;
   min-height: 100%;
   padding-bottom: 100px;
-}
-
-html,
-body
- {
-  height: 100%;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 h1 {
@@ -41,6 +41,15 @@ a:active,
 a:visited {
   text-decoration: none;
   color: inherit;
+}
+
+a:hover {
+  color: whitesmoke !important;
+  text-decoration: underline;
+  font-style: italic;
+}
+#back-arrow {
+  color: rgb(170, 233, 170);
 }
 
 header {
@@ -124,29 +133,6 @@ input {
   width: 500px;
 }
 
-form .workout-type,
-form .cardio-form div,
-form .resistance-form div {
-  display: flex;
-  margin-top: 30px;
-}
-
-form label {
-  width: 150px;
-  margin-top: 0.7rem;
-}
-
-form > button {
-  float: right;
-  margin-top: 20px;
-}
-
-form::after {
-  content: " ";
-  display: block;
-  clear: both;
-}
-
 .d-none {
   display: none !important;
 }
@@ -165,18 +151,32 @@ form::after {
   width: 100%;
 }
 
-button {
+.workout-type,
+form .cardio-form div,
+form .resistance-form div {
+  display: flex;
+  margin-top: 30px;
+}
+
+form label {
+  width: 150px;
+  margin-top: 0.7rem;
+}
+
+form > button {
+  float: right;
+  margin-top: 20px;
+}
+
+form::after {
+  content: " ";
   display: block;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #aaa;
-  padding: 10px;
-  background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+  clear: both;
 }
 
 #toast {
+  opacity: 0;
+  transition: all 0.5s;
   border-radius: 4px;
   border-width: 1px;
   font-size: 13px;
@@ -189,8 +189,6 @@ button {
   position: fixed;
   top: 10px;
   right: -320px;
-  opacity: 0;
-  transition: all 0.5s;
 }
 
 #toast.success {
@@ -198,137 +196,13 @@ button {
   right: 10px;
   background-color: hsl(94, 40%, 86%);
   color: hsl(94, 90%, 16%);
-  transition: all 1.2s;
-}
-
-.workout-type,
-form .cardio-form div,
-form .resistance-form div {
-  display: flex;
-  margin-top: 30px;
-}
-
-form label {
-  width: 150px;
-  margin-top: 0.7rem;
-}
-
-form > button {
-  float: right;
-  margin-top: 20px;
-}
-
-form::after {
-  content: " ";
-  display: block;
-  clear: both;
-}
-
-.d-none {
-  display: none;
-}
-
-button {
-  display: block;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #aaa;
-  padding: 10px;
-  background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
-}
-
-#toast {
-  border-radius: 4px;
-  border-width: 1px;
-  font-size: 13px;
-  line-height: 19.5px;
-  margin: 0px 0px 16px;
-  padding: 12px 59.5px 12px 20px;
-  text-align: left;
-  width: 300px;
-  min-height: 80px;
-  position: fixed;
-  top: 10px;
-  right: -320px;
-  opacity: 0;
   transition: all 0.5s;
-}
-
-#toast.success {
-  right: 10px;
-  background-color: hsl(94, 40%, 86%);
-  color: hsl(94, 90%, 16%);
-  transition: all 0.5s;
-}
-.workout-type,
-form .cardio-form div,
-form .resistance-form div {
-  display: flex;
-  margin-top: 30px;
-}
-
-form label {
-  width: 150px;
-  margin-top: 0.7rem;
-}
-
-form > button {
-  float: right;
-  margin-top: 20px;
-}
-
-form::after {
-  content: " ";
-  display: block;
-  clear: both;
-}
-
-.d-none {
-  display: none;
-}
-
-button {
-  display: block;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #aaa;
-  padding: 10px;
-  background: linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
-}
-
-#toast {
-  border-radius: 4px;
-  border-width: 1px;
-  font-size: 13px;
-  line-height: 19.5px;
-  margin: 0px 0px 16px;
-  padding: 12px 59.5px 12px 20px;
-  text-align: left;
-  width: 300px;
-  min-height: 80px;
-  position: fixed;
-  top: 10px;
-  right: -320px;
-}
-
-#toast.success {
-  background-color: hsl(94, 40%, 86%);
-  color: hsl(94, 90%, 16%);
   animation-name: toast;
   animation-duration: 2s;
   animation-fill-mode: forwards;
   animation-delay: 0.2s;
   animation-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
-
-.d-none {
-  display: none;
-}
-
 .btn,
 button {
   display: block;
@@ -419,10 +293,19 @@ form > button {
 
 .prev-workout .buttons {
   display: flex;
-  height: 75px;
-  margin-top: 30px;
+  height: 55px;
+  margin-top: 35px;
 }
 
+#continue-btn:hover {
+  background-color: rgb(7, 7, 87) !important;
+  font-style: italic;
+}
+
+#new-btn:hover {
+  background-color: rgb(5, 73, 85) !important;
+  font-style: italic;
+}
 .buttons .ui.button {
   margin: 0;
   width: 50%;
@@ -460,4 +343,10 @@ form > button {
     opacity: 0;
     right: -320px;
   }
+}
+
+@media screen and (max-width: 483px) {
+ .huge {
+   font-size: 16px !important;
+ }
 }
