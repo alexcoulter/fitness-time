@@ -142,6 +142,10 @@ input {
   max-width: 600px;
 }
 
+.ui.card {
+  background: rgba(255,255,255, 0.9);
+}
+
 .exercise .buttons {
   margin-top: 20px;
   display: flex;
@@ -256,10 +260,10 @@ form > button {
 }
 
 .blue {
-  background-color: #003366 !important;
+  background-color: rgba(0,51,102, .85) !important;
 }
 .positive {
-  background-color: rgb(35, 109, 114) !important;
+  background-color: rgba(35, 109, 114, .85) !important;
 }
 
 .prev-workout p {
